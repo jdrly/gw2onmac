@@ -57,8 +57,8 @@ export const features: { icon: IconName; title: string; text: Copy }[] = [
     icon: 'type',
     title: 'Sharp text at 4K',
     text: {
-      text: "An optional larger interface drawn from the game's own crisp fonts. At your own risk.",
-      short: "An optional larger interface from the game's own fonts. At your own risk.",
+      text: "An optional larger interface drawn from the game's own crisp fonts.",
+      short: "An optional larger interface from the game's own fonts.",
     },
   },
   {
@@ -161,7 +161,7 @@ export const safety: { icon: IconName; tone: 'accent' | 'gold'; title: string; t
   {
     icon: 'triangle-alert',
     tone: 'gold',
-    title: 'One optional extra, at your own risk',
+    title: 'One optional extra, off by default',
     text: {
       text: "The sharper-interface addon changes the game's memory. It's off until you turn it on and accept the warning.",
       short: 'The interface addon is off until you accept its warning.',
