@@ -1,24 +1,23 @@
 export const site = {
-  name: 'SW on Mac',
-  url: 'https://swonmac.com',
-  title: 'SW on Mac: Star Wars games on Apple Silicon Macs',
+  name: 'GW2 on Mac',
+  url: 'https://gw2onmac.com',
+  title: 'GW2 on Mac: Guild Wars 2 on Apple Silicon Macs',
   description:
-    'Two free apps for Apple Silicon Macs. SWTOR on Mac speeds up the official SWTOR Mac app, and SWGL on Mac runs SWG Legends, which has no Mac version of its own.',
-  author: 'Pharaphobia',
+    "A free, open-source app for Apple Silicon Macs. GW2 on Mac installs Guild Wars 2 through Steam or ArenaNet's own installer, on a tuned Wine with Direct3D 11 straight to Metal.",
+  author: 'Jan Drlý',
 };
 
+/** The app's GitHub repo; the site reads its releases at build time (src/content.config.ts). */
+export const repo = 'jdrly/gw2-on-mac';
+
 export const links = {
-  github: 'https://github.com/jdrly',
+  repo: `https://github.com/${repo}`,
+  issues: `https://github.com/${repo}/issues`,
+  releases: `https://github.com/${repo}/releases`,
+  license: `https://github.com/${repo}/blob/main/LICENSE`,
+  dxmt: 'https://github.com/jdrly/dxmt',
   discord: 'https://discord.gg/AnV3fZWz2b',
-  d9mt: 'https://github.com/jdrly/d9mt',
-  swtorRepo: 'https://github.com/jdrly/swtor-on-mac',
-  swglRepo: 'https://github.com/jdrly/swgl-on-mac',
-  swtorIssues: 'https://github.com/jdrly/swtor-on-mac/issues',
-  swglIssues: 'https://github.com/jdrly/swgl-on-mac/issues',
-  swtorReleases: 'https://github.com/jdrly/swtor-on-mac/releases',
-  swglReleases: 'https://github.com/jdrly/swgl-on-mac/releases',
-  license: 'https://github.com/jdrly/swtor-on-mac/blob/main/LICENSE',
 };
 
 export const disclaimer =
-  'SW on Mac is an unofficial fan project and is not affiliated with or endorsed by Lucasfilm, Disney, Electronic Arts, Broadsword Online Games or the SWG Legends team. STAR WARS is a registered trademark of Lucasfilm Ltd. Mac is a trademark of Apple Inc.';
+  'Unofficial. Not made, endorsed or supported by ArenaNet or NCSOFT. Guild Wars 2 is a trademark of NCSOFT Corporation. Mac is a trademark of Apple Inc.';

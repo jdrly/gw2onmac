@@ -1,0 +1,66 @@
+---
+// #install: the Steam and ArenaNet routes, then the requirements.
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+import Responsive from './Responsive.astro';
+import { requirements, requirementsNote, routes } from '../data/content';
+---
+
+<section id="install" aria-labelledby="install-title" class="border-t border-line">
+  <div class="mx-auto flex max-w-[1440px] flex-col gap-6 px-5 py-12 md:gap-9 md:px-16 md:py-[72px]">
+    <SectionHeading id="install-title" kicker="Install" title="Two ways in. Both stay yours." />
+    <div class="grid items-start gap-6 md:gap-8 lg:grid-cols-2 xl:grid-cols-[minmax(0,444fr)_minmax(0,444fr)_minmax(0,360fr)]">
+      {
+        routes.map((r) => (
+          <article aria-labelledby={`route-${r.id}`} class="flex flex-col gap-3 rounded-xl border border-line bg-raised p-5 md:gap-[18px] md:p-7">
+            <h3 id={`route-${r.id}`} class="flex items-center gap-[9px] font-head text-[21px] leading-[1.25] text-fg md:gap-2.5 md:text-[26px]">
+              <Icon name={r.icon} size={22} class="size-[19px] text-accent md:size-[22px]" />
+              {r.title}
+            </h3>
+            <p class="only-wide text-base leading-[1.4] text-fg-2">{r.sub}</p>
+            <ol>
+              {r.steps.map((s, i) => (
+                <li class="flex gap-3 border-t border-line pt-2.5 not-last:pb-3 md:gap-4 md:pt-3.5 md:not-last:pb-[18px]">
+                  <span
+                    class:list={[
+                      'w-6 shrink-0 font-display text-[19px] leading-[1.35] font-bold md:w-[30px] md:text-2xl md:leading-[1.1]',
+                      i === r.steps.length - 1 ? 'text-accent' : 'text-fg-3',
+                    ]}
+                    aria-hidden="true"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span class="only-wide flex flex-col gap-[3px] pt-px">
+                    <span class="text-[17px] leading-tight font-bold text-fg">{s.title}</span>
+                    <span class="text-[15.5px] leading-[1.35] text-fg-2">{s.text}</span>
+                  </span>
+                  <span class="only-narrow text-[15.5px] leading-[1.35] text-fg">{s.short}</span>
+                </li>
+              ))}
+            </ol>
+          </article>
+        ))
+      }
+
+      <div class="md:max-w-[560px] lg:col-span-2 xl:col-span-1 xl:max-w-none xl:pt-1.5">
+        <h3 class="font-head text-[21px] leading-[1.25] text-fg md:text-[26px]">Requirements</h3>
+        <dl>
+          {
+            requirements.map((r) => (
+              <div class="flex items-baseline justify-between gap-4 border-b border-line py-[11px] text-[15px] leading-none md:py-3.5 md:text-base">
+                <dt class="font-bold text-fg-3">{r.label}</dt>
+                <dd class="text-right text-fg">
+                  <Responsive copy={r.value} />
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p class="only-wide flex gap-2 pt-4 text-[14.5px] leading-[1.35] text-fg-3">
+          <Icon name="info" size={15} class="mt-0.5" />
+          {requirementsNote}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

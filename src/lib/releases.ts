@@ -1,9 +1,8 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import type { AppId } from '../data/apps';
 
 export type Release = CollectionEntry<'releases'>['data'] & { id: string };
 
-/** Stable releases of both apps, newest first. */
+/** Stable releases, newest first; empty until the first one is out. */
 export async function getReleases(): Promise<Release[]> {
   const entries = await getCollection('releases');
   return entries
@@ -11,15 +10,10 @@ export async function getReleases(): Promise<Release[]> {
     .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
 }
 
-/** The newest stable release of each app; undefined when an app has none yet. */
-export async function getLatest(): Promise<Record<AppId, Release | undefined>> {
-  const releases = await getReleases();
-  return {
-    swtor: releases.find((r) => r.app === 'swtor'),
-    swgl: releases.find((r) => r.app === 'swgl'),
-  };
-}
+/** "November 2026" */
+export const formatMonth = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 
-/** "Oct 17, 2026" */
+/** "November 17, 2026" */
 export const formatDate = (d: Date) =>
-  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+  d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });

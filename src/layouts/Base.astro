@@ -10,42 +10,50 @@ interface Props {
 
 const { title = site.title, description = site.description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.jpg', Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={site.author} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="color-scheme" content="dark light" />
-    <meta name="theme-color" content="#05060a" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f3ede1" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL('/og.jpg', Astro.site)} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="SW on Mac: Star Wars games on Apple Silicon Macs. SWTOR on Mac and SWGL on Mac." />
+    <meta property="og:image:alt" content="GW2 on Mac: Guild Wars 2, at home on your Mac. Free and open source, for Apple Silicon." />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content={new URL('/og.jpg', Astro.site)} />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="generator" content={Astro.generator} />
 
-    <Font cssVariable="--font-unbounded" preload />
-    <Font cssVariable="--font-inter" preload={[{ style: 'normal' }]} />
-    <Font cssVariable="--font-jetbrains-mono" />
+    <Font cssVariable="--font-alegreya-sans" preload={[{ weight: '400', style: 'normal' }, { weight: '700', style: 'normal' }]} />
+    <Font cssVariable="--font-marcellus" preload />
+    <Font cssVariable="--font-cinzel" preload />
 
-    <!-- The saved theme before the first paint (no flash): dark by default, 'auto' follows the system -->
+    <!-- The saved theme before the first paint (no flash): System by default, which follows macOS -->
     <script is:inline>
       (() => {
-        const saved = localStorage.getItem('theme');
-        const system = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-        document.documentElement.dataset.theme = saved === 'light' ? 'light' : saved === 'auto' ? system : 'dark';
+        let saved = null;
+        try {
+          saved = localStorage.getItem('theme');
+        } catch {}
+        const system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = saved === 'light' || saved === 'dark' ? saved : system;
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#14110e' : '#f3ede1';
       })();
     </script>
   </head>

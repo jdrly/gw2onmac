@@ -1,0 +1,29 @@
+---
+// The red Download button: the .dmg of the newest release, or a disabled "Coming soon" before
+// the first one.
+import Icon from './Icon.astro';
+import type { Release } from '../lib/releases';
+
+interface Props {
+  release: Release | undefined;
+  class?: string;
+}
+
+const { release, class: className } = Astro.props;
+const base =
+  'btn-download inline-flex h-[52px] items-center justify-center gap-2.5 rounded-lg px-[26px] font-display text-[15px] leading-none font-bold tracking-[1.5px] whitespace-nowrap md:h-[54px] md:gap-3 md:text-base md:tracking-[1.6px]';
+---
+
+{
+  release ? (
+    <a href={release.dmgUrl} class:list={[base, className]} aria-label={`Download GW2 on Mac ${release.version} (.dmg)`}>
+      <Icon name="download" size={19} />
+      DOWNLOAD {release.version}
+    </a>
+  ) : (
+    <button type="button" disabled class:list={[base, className]}>
+      <Icon name="clock" size={19} />
+      COMING SOON
+    </button>
+  )
+}

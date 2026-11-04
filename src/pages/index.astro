@@ -1,30 +1,23 @@
 ---
 import Base from '../layouts/Base.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import AppSection from '../components/AppSection.astro';
-import Safety from '../components/Safety.astro';
+import Top from '../components/Top.astro';
+import Features from '../components/Features.astro';
+import Install from '../components/Install.astro';
 import Faq from '../components/Faq.astro';
 import Releases from '../components/Releases.astro';
-import Support from '../components/Support.astro';
 import Footer from '../components/Footer.astro';
-import { apps } from '../data/apps';
-import { getLatest, getReleases } from '../lib/releases';
+import { getReleases } from '../lib/releases';
 
 const releases = await getReleases();
-const latest = await getLatest();
 ---
 
 <Base>
-  <Header />
+  <Top release={releases[0]} />
   <main>
-    <Hero latest={latest} />
-    <AppSection app={apps.swtor} release={latest.swtor} />
-    <AppSection app={apps.swgl} release={latest.swgl} />
-    <Safety />
+    <Features />
+    <Install />
     <Faq />
-    <Releases releases={releases} latest={latest} />
-    <Support />
+    <Releases releases={releases} />
   </main>
   <Footer />
 </Base>

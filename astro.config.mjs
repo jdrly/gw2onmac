@@ -2,35 +2,38 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
+// Fonts from the design (docs/gw2onmac.pen), all SIL OFL, downloaded at build time and served
+// from this site: Cinzel for the wordmark, buttons and version numbers, Marcellus for headings,
+// Alegreya Sans for text.
 export default defineConfig({
-  site: 'https://swonmac.com',
+  site: 'https://gw2onmac.com',
   fonts: [
     {
       provider: fontProviders.fontsource(),
-      name: 'Unbounded',
-      cssVariable: '--font-unbounded',
-      weights: ['200 900'],
+      name: 'Cinzel',
+      cssVariable: '--font-cinzel',
+      weights: ['400 900'],
       styles: ['normal'],
       subsets: ['latin'],
-      fallbacks: ['sans-serif'],
+      fallbacks: ['serif'],
     },
     {
       provider: fontProviders.fontsource(),
-      name: 'Inter',
-      cssVariable: '--font-inter',
-      weights: ['100 900'],
+      name: 'Marcellus',
+      cssVariable: '--font-marcellus',
+      weights: [400],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['serif'],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Alegreya Sans',
+      cssVariable: '--font-alegreya-sans',
+      weights: [400, 500, 700],
       styles: ['normal', 'italic'],
-      subsets: ['latin'],
+      subsets: ['latin', 'latin-ext'],
       fallbacks: ['sans-serif'],
-    },
-    {
-      provider: fontProviders.fontsource(),
-      name: 'JetBrains Mono',
-      cssVariable: '--font-jetbrains-mono',
-      weights: ['100 800'],
-      styles: ['normal'],
-      subsets: ['latin'],
-      fallbacks: ['monospace'],
     },
   ],
   vite: {

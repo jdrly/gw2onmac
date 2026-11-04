@@ -1,0 +1,109 @@
+---
+// #top: the red ink band with the header on it, then the hero: the copy on the left, the painting
+// and the app window on the right (stacked below xl). The band, its fade and the screenshot
+// follow the theme.
+import { getImage, Image } from 'astro:assets';
+import Header from './Header.astro';
+import DownloadButton from './DownloadButton.astro';
+import Icon from './Icon.astro';
+import Responsive from './Responsive.astro';
+import { hero } from '../data/content';
+import { formatMonth, type Release } from '../lib/releases';
+import strokeLight from '../assets/art/stroke-light.jpg';
+import strokeDark from '../assets/art/stroke-dark.jpg';
+import painting from '../assets/art/painting.webp';
+import shotLight from '../assets/art/shot-ready.png';
+import shotDark from '../assets/art/shot-ready-dark.png';
+
+interface Props {
+  release: Release | undefined;
+}
+
+const { release } = Astro.props;
+
+const band = async (src: ImageMetadata) =>
+  (await getImage({ src, format: 'webp', width: 2736, quality: 78 })).src;
+const bandLight = await band(strokeLight);
+const bandDark = await band(strokeDark);
+
+const shotSizes = '(min-width: 1280px) 680px, (min-width: 768px) 680px, calc(100vw - 40px)';
+const month = release && formatMonth(release.publishedAt);
+---
+
+<div id="top" class="relative overflow-hidden bg-bg">
+  <!-- The ink band: multiplied onto the parchment, or lightened onto the dark page, then faded out -->
+  <div class="pointer-events-none absolute inset-x-[-180px] top-[-70px] h-[240px] md:inset-x-[-40px] md:top-[-110px] md:h-[390px]" aria-hidden="true">
+    <div class="absolute inset-0 bg-cover bg-center mix-blend-multiply dark:hidden" style={`background-image: url(${bandLight})`}></div>
+    <div class="absolute inset-0 hidden bg-cover bg-center mix-blend-lighten dark:block" style={`background-image: url(${bandDark})`}></div>
+  </div>
+  <div class="pointer-events-none absolute inset-x-0 top-[130px] h-[60px] bg-linear-to-b from-bg/0 to-bg md:top-[200px] md:h-[90px]" aria-hidden="true"></div>
+
+  <Header release={release} />
+
+  <section aria-labelledby="hero-title" class="relative mx-auto max-w-[1440px] px-5 pt-[126px] pb-10 md:px-16 md:pt-[216px] md:pb-16 xl:grid xl:grid-cols-[minmax(0,600fr)_minmax(0,700fr)] xl:gap-9 xl:pr-10 xl:pt-[152px] xl:pb-11">
+    <div class="flex max-w-[600px] flex-col gap-[18px] md:gap-[22px] xl:mt-16">
+      <p class="flex items-center gap-2 text-sm leading-none font-bold text-accent md:gap-2.5 md:text-base md:tracking-[0.6px]">
+        <span class="h-[3px] w-[18px] shrink-0 rounded-full bg-accent md:w-[22px]" aria-hidden="true"></span>
+        <Responsive copy={hero.kicker} />
+      </p>
+      <h1 id="hero-title" class="font-head text-[42px] leading-[1.08] text-fg md:text-[68px] md:leading-[1.05] xl:text-[clamp(56px,4.72vw,68px)]">
+        {hero.headline}
+      </h1>
+      <p class="text-[17px] leading-[1.4] text-fg-2 md:text-xl">
+        <Responsive copy={hero.lede} />
+      </p>
+      <div class="flex flex-col gap-[18px] md:flex-row md:flex-wrap md:gap-3.5">
+        <DownloadButton release={release} class="w-full md:w-auto" />
+        <a
+          href="#install"
+          class="inline-flex h-[46px] items-center justify-center gap-2 rounded-lg border border-line-strong px-5 text-[15.5px] leading-none font-bold text-fg transition-colors hover:bg-raised md:h-[54px] md:text-base"
+        >
+          Requirements &amp; install
+          <Icon name="arrow-down" size={16} />
+        </a>
+      </div>
+      <p class="text-[13.5px] leading-snug text-fg-3 md:text-sm">
+        {
+          release ? (
+            <>
+              <span class="only-wide">Version {release.version} · {month} · macOS 26 or later · Signed and notarized</span>
+              <span class="only-narrow">{release.version} · {month} · macOS 26 or later</span>
+            </>
+          ) : (
+            'First release coming soon · macOS 26 or later'
+          )
+        }
+      </p>
+    </div>
+
+    <!-- The painting behind the top of the app window; proportions from the design's frames -->
+    <div class="relative mx-auto mt-[74px] aspect-[350/314] w-full max-w-[700px] md:mt-16 md:aspect-[700/620] xl:mt-0 xl:max-w-none">
+      <Image
+        src={painting}
+        alt=""
+        widths={[660, 1160, 1792]}
+        sizes="(min-width: 768px) 580px, 94vw"
+        class="absolute top-0 left-[2.857%] h-auto w-[94.286%] md:left-[17.143%] md:w-[82.857%]"
+        loading="eager"
+      />
+      <div class="absolute top-[24.2%] left-0 w-full overflow-hidden rounded-lg border border-black/15 shadow-[0_24px_60px_#1e181340] md:left-[2.857%] md:w-[97.143%] md:rounded-xl dark:border-white/12 dark:shadow-[0_24px_60px_#00000080]">
+        <Image
+          src={shotLight}
+          alt="The GW2 on Mac window: This Mac with six checks all good, What it does, and the Play Guild Wars 2 button"
+          widths={[700, 1360, 1922]}
+          sizes={shotSizes}
+          class="block h-auto w-full dark:hidden"
+          loading="lazy"
+        />
+        <Image
+          src={shotDark}
+          alt="The GW2 on Mac window in dark mode: This Mac with six checks all good, What it does, and the Play Guild Wars 2 button"
+          widths={[700, 1360, 1922]}
+          sizes={shotSizes}
+          class="hidden h-auto w-full dark:block"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+</div>

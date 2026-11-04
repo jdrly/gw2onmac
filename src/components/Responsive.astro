@@ -1,0 +1,21 @@
+---
+// A line with a shorter mobile wording (data/content.ts `Copy`): both are rendered, CSS shows one.
+import type { Copy } from '../data/content';
+
+interface Props {
+  copy: Copy;
+}
+
+const { copy } = Astro.props;
+---
+
+{
+  copy.short ? (
+    <>
+      <span class="only-wide">{copy.text}</span>
+      <span class="only-narrow">{copy.short}</span>
+    </>
+  ) : (
+    copy.text
+  )
+}
