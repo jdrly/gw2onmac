@@ -1,7 +1,7 @@
 # gw2onmac.com: design brief
 
-Landing page for **GW2 on Mac**, a free, open-source macOS app by Jan Drlý that runs Guild Wars 2
-on Apple Silicon Macs. Repo: [jdrly/gw2-on-mac](https://github.com/jdrly/gw2-on-mac).
+Landing page for **GW2 on Mac**, my free, open-source macOS app that runs Guild Wars 2 on Apple
+Silicon Macs. Repo: [jdrly/gw2-on-mac](https://github.com/jdrly/gw2-on-mac).
 
 Static site (Astro on GitHub Pages), **one page**. The approved design is `docs/gw2onmac.pen`
 (Landing, Mobile and Mobile Menu, light and dark, plus the Social Preview), exported to

@@ -1,6 +1,6 @@
 # Brief: implement gw2onmac.com from the approved design
 
-Jan approved the design on 2026-11-04. This repository is a copy of `jdrly/sw-on-mac` (the Astro
+I approved the design on 2026-11-04. This repository is a copy of `jdrly/sw-on-mac` (the Astro
 site behind swonmac.com, with its GitHub Pages workflow). Turn it into gw2onmac.com: one app,
 **GW2 on Mac**, with the look of `docs/gw2onmac.pen`.
 
@@ -38,7 +38,7 @@ site behind swonmac.com, with its GitHub Pages workflow). Turn it into gw2onmac.
     Download button then reads "Coming soon" (disabled), and the release section shows a short
     "First release coming soon" entry.
   - Keep the `repository_dispatch` release trigger in `deploy.yml`.
-- **FAQ answers** (write them plainly, in Jan's voice, no claims we can't back):
+- **FAQ answers**, written plainly in my voice, with no claims I can't back:
   - **ArenaNet support:** no, it's unofficial; ask on Discord or GitHub.
   - **Macs:** Apple Silicon, macOS 26 or later, Rosetta.
   - **Speed:** depends on the scene. Big crowds are limited by the game's own main thread under
@@ -58,7 +58,7 @@ site behind swonmac.com, with its GitHub Pages workflow). Turn it into gw2onmac.
 - **Work in `/Users/jd/Development/personal/gw2onmac`**, on `main`. No remote exists yet: don't
   create, push or publish anything on GitHub. The coordinator does that.
 - **Verify with `npm run build` and screenshots:** `scripts/shot.mjs`, or a headless browser that
-  doesn't open windows on Jan's screen. Shoot desktop and mobile, light and dark, compare them
+  doesn't open windows on my screen. Shoot desktop and mobile, light and dark, compare them
   with `docs/exports/`, and save the shots under `docs/shots/`.
 - Commit at milestones, each marked as written by an AI agent.
 - **Report to the coordinator** (Zeron chat c4679499-ac7f-4877-868d-b2a6bdc0fb22) with
