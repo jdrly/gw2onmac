@@ -35,7 +35,7 @@ export const features: { icon: IconName; title: string; text: Copy }[] = [
   {
     icon: 'zap',
     title: 'Direct3D 11 straight to Metal',
-    text: { text: "Our own build of DXMT draws the game through Metal 4, tuned for GW2's busy maps." },
+    text: { text: "My own build of DXMT draws the game through Metal 4, tuned for GW2's busy maps." },
   },
   {
     icon: 'flame',
