@@ -21,6 +21,9 @@ export interface Copy {
   short?: string;
 }
 
+/** The hero's second download: the newest 0.1.x, for the macOS versions 0.2 doesn't run on */
+export const olderMac = { line: '0.1.', macos: '26.0 to 26.3' };
+
 export const hero = {
   kicker: { text: 'A free, open-source app for Apple Silicon Macs', short: 'Free and open source, for Apple Silicon' },
   headline: 'Guild Wars 2, at home on your Mac.',

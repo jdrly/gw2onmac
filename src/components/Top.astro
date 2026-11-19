@@ -1,13 +1,14 @@
 ---
 // #top: the red ink band with the header on it, then the hero: the copy on the left, the painting
 // and the app window on the right (stacked below xl). The band, its fade and the screenshot
-// follow the theme.
+// follow the theme. Under the version line, the newest 0.1.x's DMG for macOS 26.0 to 26.3, once the
+// latest release is 0.2 or later.
 import { getImage, Image } from 'astro:assets';
 import Header from './Header.astro';
 import DownloadButton from './DownloadButton.astro';
 import Icon from './Icon.astro';
 import Responsive from './Responsive.astro';
-import { hero } from '../data/content';
+import { hero, olderMac } from '../data/content';
 import { formatMonth, type Release } from '../lib/releases';
 import strokeLight from '../assets/art/stroke-light.jpg';
 import strokeDark from '../assets/art/stroke-dark.jpg';
@@ -17,9 +18,11 @@ import shotDark from '../assets/art/shot-ready-dark.png';
 
 interface Props {
   release: Release | undefined;
+  /** The newest 0.1.x, when the latest release is newer */
+  older?: Release | undefined;
 }
 
-const { release } = Astro.props;
+const { release, older } = Astro.props;
 
 const band = async (src: ImageMetadata) =>
   (await getImage({ src, format: 'webp', width: 2736, quality: 78 })).src;
@@ -74,6 +77,18 @@ const month = release && formatMonth(release.publishedAt);
           )
         }
       </p>
+      {
+        older && (
+          <a
+            href={older.dmgUrl}
+            class="-mt-1.5 inline-flex min-h-[42px] items-center justify-center gap-2 self-stretch rounded-lg border border-line-strong px-4 py-2 text-[14.5px] leading-tight font-bold text-fg transition-colors hover:bg-raised md:-mt-2 md:self-start md:text-[15px]"
+            aria-label={`Download GW2 on Mac ${older.version} (.dmg), for macOS ${olderMac.macos}`}
+          >
+            <Icon name="download" size={16} class="shrink-0" />
+            <span>Download {older.version} for macOS {olderMac.macos}</span>
+          </a>
+        )
+      }
     </div>
 
     <!-- The painting behind the top of the app window; proportions from the design's frames -->

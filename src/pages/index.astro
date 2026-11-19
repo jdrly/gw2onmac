@@ -6,13 +6,14 @@ import Install from '../components/Install.astro';
 import Faq from '../components/Faq.astro';
 import Releases from '../components/Releases.astro';
 import Footer from '../components/Footer.astro';
-import { getReleases } from '../lib/releases';
+import { getReleases, olderLine } from '../lib/releases';
+import { olderMac } from '../data/content';
 
 const releases = await getReleases();
 ---
 
 <Base>
-  <Top release={releases[0]} />
+  <Top release={releases[0]} older={olderLine(releases, olderMac.line)} />
   <main>
     <Features />
     <Install />
