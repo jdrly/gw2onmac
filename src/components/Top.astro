@@ -1,13 +1,15 @@
 ---
 // #top: the red ink band with the header on it, then the hero: the copy on the left, the painting
 // and the app window on the right (stacked below xl). The band, its fade and the screenshot
-// follow the theme.
+// follow the theme. Under the version line, the newest 0.1.x's DMG for macOS 26.0 to 26.3, once the
+// latest release is 0.2 or later.
 import { getImage, Image } from 'astro:assets';
 import Header from './Header.astro';
 import DownloadButton from './DownloadButton.astro';
+import OlderDownload from './OlderDownload.astro';
 import Icon from './Icon.astro';
 import Responsive from './Responsive.astro';
-import { hero } from '../data/content';
+import { hero, olderMac } from '../data/content';
 import { formatMonth, type Release } from '../lib/releases';
 import strokeLight from '../assets/art/stroke-light.jpg';
 import strokeDark from '../assets/art/stroke-dark.jpg';
@@ -17,9 +19,11 @@ import shotDark from '../assets/art/shot-ready-dark.png';
 
 interface Props {
   release: Release | undefined;
+  /** The newest 0.1.x, when the latest release is newer */
+  older?: Release | undefined;
 }
 
-const { release } = Astro.props;
+const { release, older } = Astro.props;
 
 const band = async (src: ImageMetadata) =>
   (await getImage({ src, format: 'webp', width: 2736, quality: 78 })).src;
@@ -28,6 +32,8 @@ const bandDark = await band(strokeDark);
 
 const shotSizes = '(min-width: 1280px) 680px, (min-width: 768px) 680px, calc(100vw - 40px)';
 const month = release && formatMonth(release.publishedAt);
+// (the macOS the named version needs: 0.1.x runs on 26.0, in case the page shows it as the latest)
+const macos = release?.version.startsWith(olderMac.line) ? olderMac.min : '26.4';
 ---
 
 <div id="top" class="relative overflow-hidden bg-bg">
@@ -38,7 +44,7 @@ const month = release && formatMonth(release.publishedAt);
   </div>
   <div class="pointer-events-none absolute inset-x-0 top-[130px] h-[60px] bg-linear-to-b from-bg/0 to-bg md:top-[200px] md:h-[90px]" aria-hidden="true"></div>
 
-  <Header release={release} />
+  <Header release={release} older={older} />
 
   <section aria-labelledby="hero-title" class="relative mx-auto max-w-[1440px] px-5 pt-[126px] pb-10 md:px-16 md:pt-[216px] md:pb-16 xl:grid xl:grid-cols-[minmax(0,600fr)_minmax(0,700fr)] xl:gap-9 xl:pr-10 xl:pt-[152px] xl:pb-11">
     <div class="flex max-w-[600px] flex-col gap-[18px] md:gap-[22px] xl:mt-16">
@@ -66,14 +72,15 @@ const month = release && formatMonth(release.publishedAt);
         {
           release ? (
             <>
-              <span class="only-wide">Version {release.version} · {month} · macOS 26 or later · Signed and notarized</span>
-              <span class="only-narrow">{release.version} · {month} · macOS 26 or later</span>
+              <span class="only-wide">Version {release.version} · {month} · macOS {macos} or later · Signed and notarized</span>
+              <span class="only-narrow">{release.version} · {month} · macOS {macos} or later</span>
             </>
           ) : (
-            'First release coming soon · macOS 26 or later'
+            'First release coming soon · macOS 26.4 or later'
           )
         }
       </p>
+      {older && <OlderDownload release={older} class="-mt-1.5 self-stretch md:-mt-2 md:self-start" />}
     </div>
 
     <!-- The painting behind the top of the app window; proportions from the design's frames -->

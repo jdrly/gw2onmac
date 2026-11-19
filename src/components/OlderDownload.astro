@@ -1,0 +1,26 @@
+---
+// The second download: the newest 0.1.x's DMG, for the macOS versions 0.2 doesn't run on (in the
+// hero and the mobile menu, once the latest release is 0.2 or later).
+import Icon from './Icon.astro';
+import { olderMac } from '../data/content';
+import type { Release } from '../lib/releases';
+
+interface Props {
+  release: Release;
+  class?: string;
+}
+
+const { release, class: className } = Astro.props;
+---
+
+<a
+  href={release.dmgUrl}
+  class:list={[
+    'inline-flex min-h-[42px] items-center justify-center gap-2 rounded-lg border border-line-strong px-4 py-2 text-[14.5px] leading-tight font-bold text-fg transition-colors hover:bg-raised md:text-[15px]',
+    className,
+  ]}
+  aria-label={`Download GW2 on Mac ${release.version} (.dmg), for macOS ${olderMac.macos}`}
+>
+  <Icon name="download" size={16} class="shrink-0" />
+  <span>Download {release.version} for macOS {olderMac.macos}</span>
+</a>
