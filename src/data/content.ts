@@ -187,23 +187,24 @@ export const faq: { q: Copy; a: string[] }[] = [
   {
     q: { text: 'How fast is it?' },
     a: [
-      "It depends on the scene. In big crowds, like Lion's Arch or a busy meta, the limit is the game's own main thread, whose Intel code FEX translates, so a faster GPU doesn't help much there.",
+      "It depends on the scene. In big crowds, like Lion's Arch or a busy meta, the limit is usually the game's own main thread, whose Intel code FEX translates, so a faster GPU doesn't help much there.",
       "I don't give FPS numbers: they change too much from one Mac and one scene to the next.",
     ],
   },
   {
     q: { text: 'Can I use arcdps or other addons?' },
     a: [
-      "Settings › Interface has two switches, off by default: arcdps and ReShade. Each asks first, then downloads the addon. Both can be on at once, and ReShade then loads arcdps itself.",
+      "Settings › Interface has two switches, off by default: arcdps and ReShade. Each asks first, then downloads the addon. Both can be on at once, and ReShade then loads arcdps itself. I've played with arcdps on 0.2's engine. ReShade I haven't run in the game on it yet.",
       "ReShade's presets, shaders and screenshots live outside the game, in <code>~/Library/Application Support/GW2 on Mac arm64/ReShade</code>. Drop a preset or a zip on the Settings window to add it.",
-      "Other addons that install as a <code>d3d11.dll</code> load the same way: first, passing the game's calls on to GW2 on Mac's Direct3D 11. Blish HUD isn't supported yet.",
+      "Other addons that install as a <code>d3d11.dll</code> next to the game load first and pass its calls on to GW2 on Mac's Direct3D 11. I haven't tested the Nexus loader. Blish HUD isn't supported yet.",
     ],
   },
   {
     q: { text: 'I play on GW2 on Mac 0.1. What does the update do?', short: 'What does the update from 0.1 do?' },
     a: [
-      "0.1 offers 0.2 as an update. At its first start 0.2 moves your install over by itself: a new bottle on the new engine, with clones of Steam, the game, the game's settings, arcdps and ReShade. On the same disk the clones take no extra space, and the game doesn't download again. Steam may ask you to sign in once.",
-      "0.1's folders stay as they were. To go back, drag <a href=\"https://github.com/jdrly/gw2-on-mac/releases/tag/v0.1.4\">0.1.4's app</a> over the new one. Delete 0.1's folders only once you don't want that way back.",
+      "0.1 offers 0.2 as an update. At its first start 0.2 moves your install over by itself: a new bottle on the new engine, with Steam and the game, or the game's folder on ArenaNet's route, the game's settings, arcdps and ReShade. It reuses the game's files, so the game doesn't download again. On the same disk it clones them, which takes no extra space until the copies change. From another disk it copies them after checking the free space. Steam may ask you to sign in once.",
+      "Two installs don't move by themselves: one where a 0.2 test build is already installed, and a game in a Steam library outside 0.1's bottle. The window's card Game files I already have brings that game over.",
+      "0.1's folders stay as they were. To go back, download the DMG from <a href=\"https://github.com/jdrly/gw2-on-mac/releases/tag/v0.1.4\">0.1.4's release page</a>, open it and drag its GW2 on Mac over the new one. Delete 0.1's folders only once you don't want that way back.",
     ],
   },
   {
