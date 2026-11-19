@@ -203,7 +203,7 @@ export const faq: { q: Copy; a: string[] }[] = [
     q: { text: 'I play on GW2 on Mac 0.1. What does the update do?', short: 'What does the update from 0.1 do?' },
     a: [
       "0.1 offers 0.2 as an update. At its first start 0.2 moves your install over by itself: a new bottle on the new engine, with Steam and the game, or the game's folder on ArenaNet's route, the game's settings, arcdps and ReShade. It reuses the game's files, so the game doesn't download again. On the same disk it clones them, which takes no extra space until the copies change. From another disk it copies them after checking the free space. Steam may ask you to sign in once.",
-      "Two installs don't move by themselves: one where a 0.2 test build is already installed, and a game in a Steam library outside 0.1's bottle. The window's card Game files I already have brings that game over.",
+      "Some installs don't move by themselves, such as one where a 0.2 test build is already installed, or a game in a Steam library outside 0.1's bottle. The window's card Game files I already have brings that game over, with Choose folder… for a library elsewhere.",
       "0.1's folders stay as they were. To go back, download the DMG from <a href=\"https://github.com/jdrly/gw2-on-mac/releases/tag/v0.1.4\">0.1.4's release page</a>, open it and drag its GW2 on Mac over the new one. Delete 0.1's folders only once you don't want that way back.",
     ],
   },
