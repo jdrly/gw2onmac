@@ -47,6 +47,11 @@ async function loadReleases() {
   if (res.status === 404) return [];
   if (!res.ok) throw new Error(`GitHub releases of ${repo}: ${res.status} ${res.statusText}`);
   const releases = (await res.json()) as GitHubRelease[];
+  // The release GitHub marks Latest, which isn't always the newest by date (a 0.1.x fix published
+  // with --latest=false after 0.2). 404: none yet.
+  const latestRes = await fetch(`https://api.github.com/repos/${repo}/releases/latest`, { headers });
+  if (!latestRes.ok && latestRes.status !== 404) throw new Error(`GitHub latest release of ${repo}: ${latestRes.status} ${latestRes.statusText}`);
+  const latestTag = latestRes.ok ? ((await latestRes.json()) as GitHubRelease).tag_name : undefined;
 
   return releases
     .filter((r) => !r.draft && !r.prerelease)
@@ -60,6 +65,7 @@ async function loadReleases() {
         publishedAt: r.published_at,
         url: r.html_url,
         dmgUrl: dmg?.browser_download_url ?? r.html_url,
+        latest: r.tag_name === latestTag,
         ...parseNotes(r.body_html ?? ''),
       };
     });
@@ -73,6 +79,7 @@ const releases = defineCollection({
     publishedAt: z.coerce.date(),
     url: z.url(),
     dmgUrl: z.url(),
+    latest: z.boolean(),
     summary: z.string(),
     bodyHtml: z.string(),
   }),
