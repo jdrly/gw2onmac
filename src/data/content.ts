@@ -201,7 +201,7 @@ export const faq: { q: Copy; a: string[] }[] = [
   {
     q: { text: 'Can I use arcdps or other addons?' },
     a: [
-      "Settings › Interface has two switches, off by default: arcdps and ReShade. Each asks first, then downloads the addon. Both can be on at once, and ReShade then loads arcdps itself. I've played with arcdps on 0.2's engine. ReShade I haven't run in the game on it yet.",
+      "Settings › Interface has two switches, off by default: arcdps and ReShade. Each asks first, then downloads the addon. Both can be on at once, and ReShade then loads arcdps itself. I've played on 0.2's engine with ReShade and arcdps on together.",
       "ReShade's presets, shaders and screenshots live outside the game, in <code>~/Library/Application Support/GW2 on Mac arm64/ReShade</code>. Drop a preset or a zip on the Settings window to add it.",
       "Other addons that install as a <code>d3d11.dll</code> next to the game load first and pass its calls on to GW2 on Mac's Direct3D 11. I haven't tested the Nexus loader. Blish HUD isn't supported yet.",
     ],
@@ -209,7 +209,8 @@ export const faq: { q: Copy; a: string[] }[] = [
   {
     q: { text: 'I play on GW2 on Mac 0.1. What does the update do?', short: 'What does the update from 0.1 do?' },
     a: [
-      "On macOS 26.4 or later, 0.1 offers 0.2 as an update. At its first start 0.2 moves your install over by itself: a new bottle on the new engine, then Steam's folder with your login and the game, or on ArenaNet's route the game's folder. The game's settings, arcdps and ReShade come along. The move is a rename on the same disk, so it needs no room for a second copy and the game doesn't download again. If 0.1's game is on another disk, the move stops before it changes anything and says why. Steam may ask you to sign in once.",
+      "On macOS 26.4 or later, 0.1 offers 0.2 as an update. At its first start 0.2 moves your install over by itself: a new bottle on the new engine, then Steam's folder with your login and the game, or on ArenaNet's route the game's folder. The game's settings, arcdps and ReShade come along. The move is a rename on the same disk, so it needs no room for a second copy and the game doesn't download again. If 0.1's game is on another disk, the move stops before it changes anything and says why.",
+      "On the first start after the move, Steam may show \"steamwebhelper is not responding\". Restart Steam with GPU Acceleration disabled gets past it, and Steam starts logged in. A fix is coming (<a href=\"https://github.com/jdrly/gw2-on-mac/issues/264\">#264</a>).",
       "Some installs don't move by themselves, such as one where a 0.2 test build is already installed, or a game in a Steam library outside 0.1's bottle. The window's card Game files I already have brings that game over, with Choose folder… for a library elsewhere.",
       "After the move the game lives in 0.2. To go back, choose Rollback to 0.1.4 in Settings › Troubleshooting. It moves the game back to 0.1's folder and offers <a href=\"https://github.com/jdrly/gw2-on-mac/releases/download/v0.1.4/GW2-on-Mac-0.1.4.dmg\">0.1.4's DMG</a>: quit GW2 on Mac and drag 0.1.4 over it. 0.1's folders stay until you delete them, and once they're gone, so is the way back.",
     ],
