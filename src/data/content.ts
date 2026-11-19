@@ -143,7 +143,7 @@ export const requirements: { label: string; value: Copy }[] = [
 export const requirementsNote = 'Every game download comes from Valve or ArenaNet. GW2 on Mac hosts nothing of the game.';
 
 /** Under the requirements, on every width: the table is 0.2's */
-export const requirementsOlder = "That's for 0.2. On macOS 26.0 to 26.3, download the newest 0.1 instead, from the second button at the top. It needs Rosetta.";
+export const requirementsOlder = "That's for 0.2. On macOS 26.0 to 26.3, use the 0.1 download at the top instead. It needs Rosetta.";
 
 export const safety: { icon: IconName; tone: 'accent' | 'gold'; title: string; text: Copy }[] = [
   {
@@ -188,7 +188,7 @@ export const faq: { q: Copy; a: string[] }[] = [
     a: [
       "0.2 needs a Mac with Apple Silicon (M1 or later) on macOS 26.4 or later. Intel Macs aren't supported.",
       "0.2 doesn't need Rosetta. Wine and DXMT run as Apple Silicon code, and FEX translates the game's and Steam's Intel code inside Wine.",
-      "On macOS 26.0 to 26.3, download the newest 0.1, from the second button at the top. It runs under Rosetta. An installed 0.1 keeps working there as it is, but it gets no update.",
+      "On macOS 26.0 to 26.3, use the 0.1 download at the top. It runs under Rosetta. An installed 0.1 keeps working there as it is, but it gets no update.",
     ],
   },
   {
