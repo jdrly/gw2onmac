@@ -21,8 +21,8 @@ export interface Copy {
   short?: string;
 }
 
-/** The hero's second download: the newest 0.1.x, for the macOS versions 0.2 doesn't run on */
-export const olderMac = { line: '0.1.', macos: '26.0 to 26.3' };
+/** The second download: the newest 0.1.x, for the macOS versions 0.2 doesn't run on (min: what 0.1.x needs) */
+export const olderMac = { line: '0.1.', macos: '26.0 to 26.3', min: '26.0' };
 
 export const hero = {
   kicker: { text: 'A free, open-source app for Apple Silicon Macs', short: 'Free and open source, for Apple Silicon' },
@@ -205,15 +205,16 @@ export const faq: { q: Copy; a: string[] }[] = [
   {
     q: { text: 'I play on GW2 on Mac 0.1. What does the update do?', short: 'What does the update from 0.1 do?' },
     a: [
-      "0.1 offers 0.2 as an update. At its first start 0.2 moves your install over by itself: a new bottle on the new engine, with Steam and the game, or the game's folder on ArenaNet's route, the game's settings, arcdps and ReShade. It reuses the game's files, so the game doesn't download again. On the same disk it clones them, which takes no extra space until the copies change. From another disk it copies them after checking the free space. Steam may ask you to sign in once.",
+      "0.1 offers 0.2 as an update. At its first start 0.2 moves your install over by itself: a new bottle on the new engine, then Steam's folder with your login and the game, or on ArenaNet's route the game's folder. The game's settings, arcdps and ReShade come along. The move is a rename on the same disk, so it needs no room for a second copy and the game doesn't download again. If 0.1's game is on another disk, the move stops before it changes anything and says why. Steam may ask you to sign in once.",
       "Some installs don't move by themselves, such as one where a 0.2 test build is already installed, or a game in a Steam library outside 0.1's bottle. The window's card Game files I already have brings that game over, with Choose folder… for a library elsewhere.",
-      "0.1's folders stay as they were. To go back, download the DMG from <a href=\"https://github.com/jdrly/gw2-on-mac/releases/tag/v0.1.4\">0.1.4's release page</a>, open it and drag its GW2 on Mac over the new one. Delete 0.1's folders only once you don't want that way back.",
+      "After the move the game lives in 0.2. To go back, choose Rollback to 0.1.4 in Settings › Troubleshooting. It moves the game back to 0.1's folder and offers <a href=\"https://github.com/jdrly/gw2-on-mac/releases/tag/v0.1.4\">0.1.4's DMG</a>: quit GW2 on Mac and drag 0.1.4 over it. 0.1's folders stay until you delete them, and once they're gone, so is the way back.",
     ],
   },
   {
     q: { text: 'What happens to my game when I uninstall?', short: 'What happens when I uninstall?' },
     a: [
       "Uninstall removes the app's bottle, and the game files in it go too. To play again later, you'd download the game again. Your account and characters are on ArenaNet's servers and aren't touched.",
+      "After the update from 0.1, Uninstall refuses while the moved game is in the bottle, since that's its only copy. Choose Rollback to 0.1.4 first.",
     ],
   },
 ];

@@ -11,12 +11,13 @@ export async function getReleases(): Promise<Release[]> {
 }
 
 /**
- * The newest release of an older line (`line`, a version prefix such as "0.1."), for the Macs the
- * latest doesn't run on. None while the latest is itself on that line, or before any release.
+ * The newest release of an older line (`line`, a version prefix such as "0.1.") that has a DMG, for
+ * the Macs the latest doesn't run on. None while the latest is itself on that line, or before any
+ * release.
  */
 export function olderLine(releases: Release[], line: string): Release | undefined {
   if (!releases[0] || releases[0].version.startsWith(line)) return undefined;
-  return releases.find((r) => r.version.startsWith(line));
+  return releases.find((r) => r.version.startsWith(line) && r.dmgUrl.endsWith('.dmg'));
 }
 
 /** "November 2026" */

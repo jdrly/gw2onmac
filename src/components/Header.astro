@@ -4,15 +4,18 @@
 // without JS; the script closes it on navigation, Escape and when the layout grows past it).
 import Wordmark from './Wordmark.astro';
 import DownloadButton from './DownloadButton.astro';
+import OlderDownload from './OlderDownload.astro';
 import Icon, { type Name } from './Icon.astro';
 import { links } from '../data/site';
 import type { Release } from '../lib/releases';
 
 interface Props {
   release: Release | undefined;
+  /** The newest 0.1.x, when the latest release is newer */
+  older?: Release | undefined;
 }
 
-const { release } = Astro.props;
+const { release, older } = Astro.props;
 
 const nav: { href: string; label: string; icon: Name }[] = [
   { href: '#features', label: 'Features', icon: 'sparkles' },
@@ -140,6 +143,7 @@ const themes = [
                 }
               </div>
               <DownloadButton release={release} class="w-full" />
+              {older && <OlderDownload release={older} class="w-full" />}
             </div>
           </div>
         </div>
