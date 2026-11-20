@@ -1,7 +1,7 @@
 ---
 // #top: the red ink band with the header on it, then the hero: the copy on the left, the painting
 // and the app window on the right (stacked below xl). The band, its fade and the screenshot
-// follow the theme. Under the version line, the newest 0.1.x's DMG for macOS 26.0 to 26.3, once the
+// follow the theme. Under the version line, the newest 0.1.x's DMG for macOS 26.0 to 26.4, once the
 // latest release is 0.2 or later.
 import { getImage, Image } from 'astro:assets';
 import Header from './Header.astro';
@@ -33,7 +33,7 @@ const bandDark = await band(strokeDark);
 const shotSizes = '(min-width: 1280px) 680px, (min-width: 768px) 680px, calc(100vw - 40px)';
 const month = release && formatMonth(release.publishedAt);
 // (the macOS the named version needs: 0.1.x runs on 26.0, in case the page shows it as the latest)
-const macos = release?.version.startsWith(olderMac.line) ? olderMac.min : '26.4';
+const macos = release?.version.startsWith(olderMac.line) ? olderMac.min : '26.5';
 ---
 
 <div id="top" class="relative overflow-hidden bg-bg">
@@ -76,7 +76,7 @@ const macos = release?.version.startsWith(olderMac.line) ? olderMac.min : '26.4'
               <span class="only-narrow">{release.version} · {month} · macOS {macos} or later</span>
             </>
           ) : (
-            'First release coming soon · macOS 26.4 or later'
+            'First release coming soon · macOS 26.5 or later'
           )
         }
       </p>
